@@ -4,7 +4,7 @@ export async function getCategories() {
     const data = await fetchRequest.json();
     return data;
   } catch (error) {
-    console.log(error);
+    return `An error has ocurred: ${error}`;
   }
 }
 
@@ -14,6 +14,6 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
     const data = fetchRequest.json();
     return data;
   } catch (error) {
-    console.log(error);
+    return `An error has ocurred: ${error}`;
   }
 }
