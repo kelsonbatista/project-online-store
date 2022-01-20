@@ -13,9 +13,9 @@ main {
 }
 
 .category__item {
-  text-align: left;
   background: white;
   border: none;
   margin: 0 30px;
   padding: 7px 0;
+  text-align: left;
 }
