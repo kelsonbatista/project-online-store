@@ -1,0 +1,18 @@
+.products__div {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.products__item {
+  border: 1px solid #444;
+  border-radius: 10px;
+  margin: auto;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 200px;
+}
+
+.products__img {
+  width: 200px;
+}

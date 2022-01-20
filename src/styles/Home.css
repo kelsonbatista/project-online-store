@@ -1,0 +1,17 @@
+main {
+  display: flex;
+  margin: 30px auto;
+  width: 90%;
+}
+
+.categories {
+  border: 1px solid #444;
+  border-radius: 10px;
+  margin-right: 30px;
+  padding: 0 20px;
+  width: 350px;
+}
+
+.board {
+  width: 100%;
+}
