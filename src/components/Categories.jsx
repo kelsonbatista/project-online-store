@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
+import CategoryItem from './CategoryItem';
 
 class Categories extends Component {
   constructor() {
@@ -7,30 +8,18 @@ class Categories extends Component {
 
     this.state = {
       isLoading: false,
+      categories: [],
     };
   }
 
   componentDidMount() {
-    this.listCategories();
+    this.handleCategories();
   }
 
-  listCategories = async () => {
+  handleCategories = async () => {
     try {
-      // this.setState({ isLoading: true });
       const categories = await getCategories();
-      categories.forEach((category) => {
-        const item = document.createElement('button');
-        item.type = 'button';
-        item.id = category.id;
-        item.name = category.name;
-        item.value = category.name;
-        item.innerText = category.name;
-        item.className = 'category__item';
-        item.dataset.testid = 'category';
-        const catList = document.querySelector('#categories-list');
-        catList.appendChild(item);
-      });
-      // this.setState({ isLoading: false });
+      this.setState({ categories });
     } catch (error) {
       return `Error found: ${error}`;
     }
@@ -39,9 +28,23 @@ class Categories extends Component {
   render() {
     const {
       isLoading,
+      categories,
     } = this.state;
 
-    const categoriesList = <div className="categories__list" id="categories-list" />;
+    const categoriesList = categories.map((category) => (
+      <CategoryItem
+        key={ category.id }
+        label={ category.name }
+        id={ category.id }
+        type="radio"
+        name="category"
+        dataTestid="category"
+        classElement="category__item"
+        classDiv="category__item-div"
+        value={ category.name }
+        onChange={ this.handleChange }
+      />
+    ));
 
     return (
       <div className="categories__div">
