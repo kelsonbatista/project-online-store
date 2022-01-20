@@ -47,36 +47,30 @@ class Search extends React.Component {
       <>
         <section className="search__section">
           <div className="search__div">
-            <div className="search__field">
-              <label htmlFor="search">
-                Search:
-                <input
-                  type="text"
-                  id="search"
-                  data-testid="query-input"
-                  className="search__input"
-                  value={ productSearch }
-                  onChange={ this.onInputChange }
-                />
-              </label>
-              <button
-                className="search__btn"
-                type="button"
-                data-testid="query-button"
-                onClick={ this.handleClick }
-              >
-                Pesquisar
-              </button>
-            </div>
-            <div className="search__text">
-              <h4 data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </h4>
-            </div>
-          </div>
-
-          <div className="cart__btn">
-            <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
+            <label htmlFor="search">
+              Search:
+              <input
+                type="text"
+                id="search"
+                data-testid="query-input"
+                className="search__input"
+                value={ productSearch }
+                onChange={ this.onInputChange }
+              />
+            </label>
+            <button
+              className="search__btn"
+              type="button"
+              data-testid="query-button"
+              onClick={ this.handleClick }
+            >
+              Pesquisar
+            </button>
+            <Link
+              to="/carrinho-de-compras"
+              className="cart__btn"
+              data-testid="shopping-cart-button"
+            >
               <img
                 id="cart-button"
                 name="cart-button"
@@ -85,6 +79,11 @@ class Search extends React.Component {
                 className="cart__img"
               />
             </Link>
+          </div>
+          <div className="search__text">
+            <h4 data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </h4>
           </div>
         </section>
         <section>
