@@ -15,21 +15,25 @@ class Categories extends Component {
   }
 
   listCategories = async () => {
-    this.setState({ isLoading: true });
     try {
+      // this.setState({ isLoading: true });
       const categories = await getCategories();
       categories.forEach((category) => {
-        const ul = document.querySelector('#categories-list');
-        const li = document.createElement('li');
-        li.className = 'categories__item';
-        li.id = category.id;
-        li.innerText = category.name;
-        ul.appendChild(li);
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.id = category.id;
+        item.name = category.name;
+        item.value = category.name;
+        item.innerText = category.name;
+        item.className = 'category__item';
+        item.dataset.testid = 'category';
+        const catList = document.querySelector('#categories-list');
+        catList.appendChild(item);
       });
+      // this.setState({ isLoading: false });
     } catch (error) {
       return `Error found: ${error}`;
     }
-    this.setState({ isLoading: false });
   }
 
   render() {
@@ -37,12 +41,12 @@ class Categories extends Component {
       isLoading,
     } = this.state;
 
+    const categoriesList = <div className="categories__list" id="categories-list" />;
+
     return (
-      <div className="categories">
+      <div className="categories__div">
         <h3>Categorias</h3>
-        {isLoading
-          ? 'Carregando...'
-          : <ul className="categories__list" id="categories-list" /> }
+        {isLoading ? 'Carregando...' : categoriesList }
       </div>
     );
   }

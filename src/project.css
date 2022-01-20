@@ -1,0 +1,21 @@
+main {
+  display: flex;
+}
+
+.categories {
+  margin-bottom: 300px;
+  width: 300px;
+}
+
+.categories__list {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.category__item {
+  text-align: left;
+  background: white;
+  border: none;
+  margin: 0 30px;
+  padding: 7px 0;
+}
