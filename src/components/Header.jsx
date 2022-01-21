@@ -33,7 +33,7 @@ class Header extends React.Component {
     // console.log(query);
     const id = '';
     const resultSearching = await getProductsFromCategoryAndQuery(id, query);
-    // console.log(resultSearching.results);
+    console.log(resultSearching.results);
     this.setState({
       answerSearch: resultSearching.results,
     });
