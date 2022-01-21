@@ -2,9 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import ListFilter from './ListFilter';
+import Products from './Products';
+import '../styles/Search.css';
+import cartIcon from '../images/cartIcon.jpg';
 
-class Header extends React.Component {
+class Search extends React.Component {
   constructor(props) {
     super(props);
 
@@ -43,60 +45,53 @@ class Header extends React.Component {
     const { productSearch, answerSearch } = this.state;
     return (
       <>
-        <header className="header">
-          <p>Header</p>
-          <div>
+        <section className="search__section">
+          <div className="search__div">
             <label htmlFor="search">
+              Search:
               <input
                 type="text"
                 id="search"
                 data-testid="query-input"
+                className="search__input"
                 value={ productSearch }
                 onChange={ this.onInputChange }
               />
-              <span className="input-btn-search">
-                <button
-                  className="btn-search"
-                  type="button"
-                  data-testid="query-button"
-                  onClick={ this.handleClick }
-                >
-                  pesquise
-                </button>
-              </span>
             </label>
-            <h4
-              data-testid="home-initial-message"
+            <button
+              className="search__btn"
+              type="button"
+              data-testid="query-button"
+              onClick={ this.handleClick }
             >
+              Pesquisar
+            </button>
+            <Link
+              to="/carrinho-de-compras"
+              className="cart__btn"
+              data-testid="shopping-cart-button"
+            >
+              <img
+                id="cart-button"
+                name="cart-button"
+                alt="Carrinho de Compras"
+                src={ cartIcon }
+                className="cart__img"
+              />
+            </Link>
+          </div>
+          <div className="search__text">
+            <h4 data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
             </h4>
           </div>
-          <section>
-            <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
-              <button
-                type="button"
-                className="shopping-cart-button"
-              >
-                Carrinho de compras
-              </button>
-            </Link>
-          </section>
-        </header>
-        <main>
-          <section className="card-product">
-            { answerSearch.map((product) => (
-              <ListFilter
-                key={ product.id }
-                title={ product.title }
-                thumbnail={ product.thumbnail }
-                price={ product.price }
-              />
-            ))}
-          </section>
-        </main>
+        </section>
+        <section>
+          <Products answerSearch={ answerSearch } />
+        </section>
       </>
     );
   }
 }
 
-export default Header;
+export default Search;
