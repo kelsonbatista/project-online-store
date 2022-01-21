@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class ListFilter extends React.Component {
   render() {
@@ -13,13 +12,6 @@ class ListFilter extends React.Component {
           alt={ title }
         />
         <p>{ `R$ ${price}` }</p>
-        <Link
-          to={ { pathname: '/ProductDetails' } }
-          data-testid="product-detail-link"
-          className="product-title"
-        >
-          View Details
-        </Link>
       </div>
     );
   }
