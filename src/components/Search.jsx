@@ -5,6 +5,7 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import Products from './Products';
 import '../styles/Search.css';
 import cartIcon from '../images/cartIcon.jpg';
+// import ProductDetails from './ProductDetails';
 
 class Search extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class Search extends React.Component {
     // console.log(query);
     const id = '';
     const resultSearching = await getProductsFromCategoryAndQuery(id, query);
-    // console.log(resultSearching.results);
+    console.log(resultSearching.results);
     this.setState({
       answerSearch: resultSearching.results,
     });
@@ -88,6 +89,7 @@ class Search extends React.Component {
         </section>
         <section>
           <Products answerSearch={ answerSearch } />
+          {/* <ProductDetails answerSearch={ answerSearch } /> */}
         </section>
       </>
     );

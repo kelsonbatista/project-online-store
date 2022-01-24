@@ -7,6 +7,8 @@ import '../styles/Products.css';
 class Products extends React.Component {
   render() {
     const { answerSearch } = this.props;
+    console.log('pagina certa', this.props);
+
     return (
       <section className="products__section">
         <div className="products__div">
@@ -19,6 +21,7 @@ class Products extends React.Component {
               classDiv="products__item"
               classTitle="products__title"
               classImg="products__img"
+              id={ product.id }
             />
           ))}
         </div>
