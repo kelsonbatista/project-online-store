@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
+// import ProductDetails from './ProductDetails';
 
 class ProductsItem extends React.Component {
   render() {
@@ -10,17 +12,27 @@ class ProductsItem extends React.Component {
       classDiv,
       classTitle,
       classImg,
+      id,
     } = this.props;
 
     return (
       <div className={ classDiv } data-testid="product">
-        <p className={ classTitle }>{ title }</p>
-        <img
-          src={ thumbnail }
-          alt={ title }
-          className={ classImg }
-        />
-        <p>{ `R$ ${price}` }</p>
+        <Link
+          to={ { pathname: `/ProductDetails/${id}` } }
+          data-testid="product-detail-link"
+          className="product-title"
+        >
+          <p className={ classTitle }>{ title }</p>
+          <img
+            src={ thumbnail }
+            alt={ title }
+            className={ classImg }
+          />
+          <p>{ `R$ ${price}` }</p>
+          <button type="button">
+            View Details
+          </button>
+        </Link>
       </div>
     );
   }
