@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import Products from './Products';
 import '../styles/Search.css';
 import cartIcon from '../images/cartIcon.jpg';
+import CategoryItem from './CategoryItem';
 // import ProductDetails from './ProductDetails';
 
 class Search extends React.Component {
@@ -14,9 +15,25 @@ class Search extends React.Component {
     this.state = {
       productSearch: [],
       answerSearch: [],
+      // categorieSelect: '',
+      isLoading: false,
+      categories: [],
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.handleCategories();
+  }
+
+  handleCategories = async () => {
+    try {
+      const categories = await getCategories();
+      this.setState({ categories });
+    } catch (error) {
+      return `Error found: ${error}`;
+    }
   }
 
   handleClick() {
@@ -32,20 +49,57 @@ class Search extends React.Component {
     });
   }
 
-  productList = async (query) => {
+  clickCategorie = ({ target }) => {
+    // console.log('clickCategorie')
+    // console.log(target.id);
+    const idCategorie = target.id;
+    this.productList(idCategorie);
+    // this.setState({
+    //   categorieSelect: idCategorie,
+    // });
+  }
+
+  productList = async (idCategorie) => {
     // console.log(query);
-    const id = '';
-    const resultSearching = await getProductsFromCategoryAndQuery(id, query);
-    console.log(resultSearching.results);
+    const { productSearch } = this.state;
+    // const query = productSearch;
+    // const id = categorieSelect;
+    // console.log(id);
+    const resultSearching = await getProductsFromCategoryAndQuery(
+      idCategorie,
+      productSearch,
+    );
     this.setState({
       answerSearch: resultSearching.results,
     });
   }
 
   render() {
-    const { productSearch, answerSearch } = this.state;
+    const {
+      productSearch,
+      answerSearch,
+      isLoading,
+      categories,
+    } = this.state;
+    const categoriesList = categories.map((category) => (
+      <CategoryItem
+        key={ category.id }
+        label={ category.name }
+        id={ category.id }
+        classElement="category__item"
+        classDiv="category__item-div"
+        value={ category.name }
+        onClick={ this.clickCategorie }
+      />
+    ));
     return (
-      <>
+      <main>
+        <section className="categories">
+          <div className="categories__div">
+            <h3>Categorias</h3>
+            {isLoading ? 'Carregando...' : categoriesList }
+          </div>
+        </section>
         <section className="search__section">
           <div className="search__div">
             <label htmlFor="search">
@@ -89,9 +143,8 @@ class Search extends React.Component {
         </section>
         <section>
           <Products answerSearch={ answerSearch } />
-          {/* <ProductDetails answerSearch={ answerSearch } /> */}
         </section>
-      </>
+      </main>
     );
   }
 }

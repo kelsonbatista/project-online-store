@@ -6,28 +6,23 @@ class CategoryItem extends Component {
     const {
       label,
       id,
-      type,
-      name,
-      dataTestid,
-      classElement,
-      classDiv,
       checked,
       value,
-      onChange,
+      onClick,
     } = this.props;
 
     return (
-      <div className={ classDiv }>
+      <div className="category__item-div">
         <label htmlFor={ id }>
           <input
             id={ id }
-            type={ type }
-            name={ name }
-            data-testid={ dataTestid }
-            className={ classElement }
             checked={ checked }
             value={ value }
-            onChange={ onChange }
+            onClick={ onClick }
+            type="radio"
+            name="category"
+            data-testId="category"
+            className="category__item"
           />
           {label}
         </label>
