@@ -4,35 +4,60 @@ import { Link } from 'react-router-dom';
 // import ProductDetails from './ProductDetails';
 
 class ProductsItem extends React.Component {
+  constructor() {
+    super();
+    this.addCart = this.addCart.bind(this);
+    // this.getInfo = this.getInfo.bind(this);
+  }
+
+  addCart() {
+    const {
+      title,
+      thumbnail,
+      price,
+      id,
+    } = this.props;
+    const cart = localStorage.cart ? JSON.parse(localStorage.cart) : [];
+    cart.push({
+      title,
+      thumbnail,
+      price,
+      id,
+    }); localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
   render() {
     const {
       title,
       thumbnail,
       price,
-      classDiv,
-      classTitle,
-      classImg,
       id,
     } = this.props;
 
     return (
-      <div className={ classDiv } data-testid="product">
+      <div className="products__item" data-testid="product">
         <Link
           to={ { pathname: `/ProductDetails/${id}` } }
           data-testid="product-detail-link"
           className="product-title"
         >
-          <p className={ classTitle }>{ title }</p>
+          <p className="products__title">{ title }</p>
           <img
             src={ thumbnail }
             alt={ title }
-            className={ classImg }
+            className="products__img"
           />
           <p>{ `R$ ${price}` }</p>
-          <button type="button">
-            View Details
-          </button>
         </Link>
+        <button
+          className="btn-add-cart"
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ this.addCart }
+        >
+          AddCarrinho
+        </button>
+
       </div>
     );
   }
