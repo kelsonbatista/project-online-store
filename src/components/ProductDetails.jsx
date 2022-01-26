@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import cartIcon from '../images/cartIcon.jpg';
 import backIcon from '../images/backIcon.jpg';
 import '../styles/ProductDetails.css';
+import Reviews from './Reviews';
+import '../styles/Reviews.css';
 
 export default class ProductDetails extends Component {
   constructor() {
@@ -121,6 +123,9 @@ export default class ProductDetails extends Component {
                   <li key={ index }>{ `${name}: ${valueName} `}</li>))}
             </ul>
           </div>
+        </div>
+        <div className="reviews">
+          <Reviews />
         </div>
       </section>
     );
