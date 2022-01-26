@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../styles/Cart.css';
 
 const MIN_VALUE = 0;
 
-class Cart extends React.Component {
+class CartItem extends React.Component {
   constructor() {
     super();
 
@@ -95,49 +96,53 @@ class Cart extends React.Component {
     } = this.props;
 
     return (
-      <div key={ id } className="products__item">
-        <p
-          data-testid="shopping-cart-product-name"
-          className="products__title"
-        >
-          {title}
-        </p>
-        <img
-          src={ thumbnail }
-          alt={ title }
-          className="products__img"
-        />
-        <p>Qtd:</p>
-        <button
-          type="button"
-          data-testid="product-increase-quantity"
-          onClick={ this.handleClickIncrease }
-        >
-          {' '}
-          +
-          {' '}
-        </button>
-        <span data-testid="shopping-cart-product-quantity">{qtdValue}</span>
-        <button
-          type="button"
-          data-testid="product-decrease-quantity"
-          onClick={ this.handleClickDecrease }
-          disabled={ isButtonDisabled }
-        >
-          -
-          {' '}
-        </button>
-
-        <p>
-          {` Sub-Total  ${subTotal}`}
-        </p>
-
+      <div key={ id } className="cart__item">
+        <div className="cart__img-div">
+          <img
+            src={ thumbnail }
+            alt={ title }
+            className="cart__img-prod"
+          />
+        </div>
+        <div className="cart__title">
+          <p
+            data-testid="shopping-cart-product-name"
+          >
+            {title}
+          </p>
+        </div>
+        <div className="cart__qty">
+          <button
+            type="button"
+            data-testid="product-increase-quantity"
+            onClick={ this.handleClickIncrease }
+          >
+            {' '}
+            +
+            {' '}
+          </button>
+          <span data-testid="shopping-cart-product-quantity">{qtdValue}</span>
+          <button
+            type="button"
+            data-testid="product-decrease-quantity"
+            onClick={ this.handleClickDecrease }
+            disabled={ isButtonDisabled }
+          >
+            -
+            {' '}
+          </button>
+        </div>
+        <div className="cart__sub">
+          <p>
+            {subTotal}
+          </p>
+        </div>
       </div>
     );
   }
 }
 
-Cart.propTypes = {
+CartItem.propTypes = {
   title: PropTypes.string,
   price: PropTypes.number,
   thumbnail: PropTypes.string,
@@ -146,4 +151,4 @@ Cart.propTypes = {
   classImg: PropTypes.string,
 }.isRequired;
 
-export default Cart;
+export default CartItem;

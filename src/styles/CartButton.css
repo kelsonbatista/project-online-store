@@ -1,0 +1,29 @@
+.cart__btn-div {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  width: 7%;
+}
+
+.cart__btn-qty {
+  align-items: center;
+  background: red;
+  border-radius: 20px;
+  color: white;
+  display: flex;
+  font-size: 10px;
+  font-weight: 600;
+  height: 20px;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 25px;
+  width: 20px;
+}
+
+.cart__img {
+  margin-right: 6px;
+  margin-top: 5px;
+  width: 40px;
+}

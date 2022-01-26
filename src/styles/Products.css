@@ -14,5 +14,10 @@
 }
 
 .products__img {
-  width: 200px;
+  height: 180px;
+  max-width: 180px;
+}
+
+.products__title {
+  height: 40px;
 }

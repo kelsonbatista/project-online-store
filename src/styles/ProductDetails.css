@@ -1,1 +1,47 @@
-/* CSS ProductDetails */
+.details {
+  margin: 30px auto;
+  width: 90%;
+}
+
+.details__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.details__product {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+}
+
+.details__left {
+  margin-right: 50px;
+  width: 90%;
+}
+
+.details__right {
+  width: 100%;
+}
+
+.details__title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.details__img {
+  align-self: center;
+  display: block;
+  height: 300px;
+}
+
+.details__id {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.details__price {
+  font-size: 24px;
+  font-weight: 700;
+}

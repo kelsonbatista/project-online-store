@@ -34,6 +34,8 @@ class ProductsItem extends React.Component {
       id,
     } = this.props;
 
+    const MAX_TITLE = 40;
+
     return (
       <div className="products__item" data-testid="product">
         <Link
@@ -41,7 +43,11 @@ class ProductsItem extends React.Component {
           data-testid="product-detail-link"
           className="product-title"
         >
-          <p className="products__title">{ title }</p>
+          <p className="products__title">
+            {title.length > MAX_TITLE
+              ? `${title.substring(0, MAX_TITLE)}...`
+              : title}
+          </p>
           <img
             src={ thumbnail }
             alt={ title }

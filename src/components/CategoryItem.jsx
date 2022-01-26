@@ -21,7 +21,7 @@ class CategoryItem extends Component {
             onClick={ onClick }
             type="radio"
             name="category"
-            data-testId="category"
+            data-testid="category"
             className="category__item"
           />
           {label}
