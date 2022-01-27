@@ -21,3 +21,24 @@
 .products__title {
   height: 40px;
 }
+
+.products__btn-add {
+  background-color: #4c6faf;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  display: inline-block;
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 10px 22px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.products__btn-add:hover {
+  background-color: #284f97;
+}
+
+.products__shipping-not {
+  visibility: hidden;
+}

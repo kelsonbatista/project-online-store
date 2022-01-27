@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import cartIcon from '../images/cartIcon.jpg';
 import backIcon from '../images/backIcon.jpg';
+import fgratis from '../images/fgratis.png';
 import '../styles/ProductDetails.css';
 import Reviews from './Reviews';
 import '../styles/Reviews.css';
+import CartButton from './CartButton';
 
 export default class ProductDetails extends Component {
   constructor() {
@@ -39,8 +40,6 @@ export default class ProductDetails extends Component {
       product,
     } = this.state;
 
-    console.log(product.title);
-
     const cart = localStorage.cart ? JSON.parse(localStorage.cart) : [];
 
     cart.push({
@@ -48,6 +47,7 @@ export default class ProductDetails extends Component {
       thumbnail: product.thumbnail,
       price: product.price,
       id: product.id,
+      qtd: 1,
     });
 
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -59,6 +59,16 @@ export default class ProductDetails extends Component {
     if (product.length === 0) {
       return <p>Loading...</p>;
     }
+
+    const freteGratis = product.shipping.free_shipping;
+    const freteGratisSim = (<img
+      src={ fgratis }
+      alt="Frete grátis"
+      className="details__shipping"
+      data-testid="free-shipping"
+    />);
+
+    const freteGratisNao = 'Frete: selecionar';
 
     return (
       <section className="details">
@@ -78,21 +88,7 @@ export default class ProductDetails extends Component {
               />
             </Link>
           </div>
-          <div className="details__cart">
-            <Link
-              to="/cart"
-              className="cart__btn"
-              data-testid="shopping-cart-button"
-            >
-              <img
-                id="cart-button"
-                name="cart-button"
-                alt="Carrinho de Compras"
-                src={ cartIcon }
-                className="cart__img"
-              />
-            </Link>
-          </div>
+          <CartButton />
         </div>
         <div className="details__product">
           <div className="details__left">
@@ -106,6 +102,9 @@ export default class ProductDetails extends Component {
             />
             <p className="details__id">{ product.id }</p>
             <p className="details__price">{ `R$ ${product.price}` }</p>
+            <p>
+              {freteGratis ? freteGratisSim : freteGratisNao}
+            </p>
             <button
               className="details__btn-add"
               type="button"

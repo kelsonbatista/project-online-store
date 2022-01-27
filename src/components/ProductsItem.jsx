@@ -6,24 +6,34 @@ import { Link } from 'react-router-dom';
 class ProductsItem extends React.Component {
   constructor() {
     super();
-    this.addCart = this.addCart.bind(this);
-    // this.getInfo = this.getInfo.bind(this);
+
+    this.state = {
+      qtyState: 1,
+    };
   }
 
-  addCart() {
+  addCart = () => {
     const {
       title,
       thumbnail,
       price,
       id,
+      available,
     } = this.props;
+
+    this.setState((prevState) => ({ qtyState: prevState.qtyState + 1 }));
+
     const cart = localStorage.cart ? JSON.parse(localStorage.cart) : [];
+
     cart.push({
       title,
       thumbnail,
       price,
       id,
-    }); localStorage.setItem('cart', JSON.stringify(cart));
+      available,
+      qtd: 1,
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   render() {
@@ -32,7 +42,17 @@ class ProductsItem extends React.Component {
       thumbnail,
       price,
       id,
+      freeShipping,
     } = this.props;
+
+    const freteGratisNao = <p className="products__shipping-not">Hidden</p>;
+    const freteGratisSim = (
+      <p
+        className="products__shipping"
+        data-testid="free-shipping"
+      >
+        Frete grátis
+      </p>);
 
     const MAX_TITLE = 40;
 
@@ -54,14 +74,15 @@ class ProductsItem extends React.Component {
             className="products__img"
           />
           <p>{ `R$ ${price}` }</p>
+          { freeShipping ? freteGratisSim : freteGratisNao }
         </Link>
         <button
-          className="btn-add-cart"
+          className="products__btn-add"
           type="button"
           data-testid="product-add-to-cart"
           onClick={ this.addCart }
         >
-          AddCarrinho
+          Adicionar Carrinho
         </button>
 
       </div>
@@ -73,6 +94,7 @@ ProductsItem.propTypes = {
   title: PropTypes.string,
   price: PropTypes.number,
   thumbnail: PropTypes.string,
+  available: PropTypes.number,
   classDiv: PropTypes.string,
   classTitle: PropTypes.string,
   classImg: PropTypes.string,

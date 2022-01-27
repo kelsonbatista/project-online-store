@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import '../styles/Cart.css';
+import deleteIcon from '../images/delete2.png';
 
-const MIN_VALUE = 0;
+const MIN_VALUE = 1;
 
 class CartItem extends React.Component {
   constructor() {
@@ -10,66 +12,80 @@ class CartItem extends React.Component {
 
     this.state = {
       qtdValue: 1,
-      isButtonDisabled: true,
-      // totalCart: 0,
       subTotal: 0,
+      increaseDisabled: false,
+      decreaseDisabled: true,
+      // totalCart: 0,
 
     };
     this.handleClickIncrease = this.handleClickIncrease.bind(this);
     this.handleClickDecrease = this.handleClickDecrease.bind(this);
     this.cartSubTotal = this.cartSubTotal.bind(this);
-    this.removeItem = this.removeItem.bind(this);
-    // this.totalCart = this.totalCart.bind(this);
   }
 
   componentDidMount() {
-    const { qtdValue } = this.state;
-    const { price } = this.props;
-    const qtdSum = qtdValue;
-    this.cartSubTotal(qtdSum, price);
+    const { id, qtd, price, available } = this.props;
+    this.cartSubTotal(price, qtd);
     // this.totalCart();
+    this.updateState(qtd, price);
+    this.updateCart(id, qtd, price, available);
   }
 
   handleClickIncrease() {
+    const { id, qtd, price, available } = this.props;
+    const netPrice = price / qtd;
     const { qtdValue } = this.state;
-    const { price } = this.props;
-    // console.log(price);
-    let qtdSum = qtdValue;
-
-    this.setState({
-      qtdValue: qtdSum += 1,
-    }); if (qtdSum >= MIN_VALUE) {
-      this.setState({
-        isButtonDisabled: false,
-      }); this.cartSubTotal(price, qtdSum);
-      // this.totalCart();
-    }
+    this.setState(() => ({
+      qtdValue: qtdValue + 1,
+      subTotal: (netPrice) * (qtdValue + 1),
+      increaseDisabled: ((qtdValue + 1) >= available),
+      decreaseDisabled: ((qtdValue + 1) < MIN_VALUE),
+    }), () => this.updateCart(id, undefined, undefined, available));
   }
 
   handleClickDecrease() {
+    const { id, qtd, price } = this.props;
+    const netPrice = price / qtd;
     const { qtdValue } = this.state;
-    let qtdSub = qtdValue;
-    this.removeItem();
-    // this.totalCart();
-    this.setState({
-      qtdValue: qtdSub -= 1,
-    }); if (qtdSub <= MIN_VALUE) {
+    const qtdNew = ((qtdValue - 1 <= 1) ? 1 : (qtdValue - 1));
+    this.setState(() => ({
+      qtdValue: qtdNew,
+      subTotal: (netPrice) * qtdNew,
+      decreaseDisabled: ((qtdValue - 1) < MIN_VALUE + 1),
+    }), () => this.updateCart(id, qtdNew, (netPrice) * qtdNew, undefined));
+  }
+
+  updateCart = (id, qtd, price, available) => {
+    const { qtdValue, subTotal } = this.state;
+    const cart = localStorage.cart ? JSON.parse(localStorage.cart) : [];
+    if (cart) {
+      const itemIndex = cart.findIndex((item) => item.id === id);
+      cart[itemIndex].qtd = (qtdValue <= 1) ? qtd : qtdValue;
+      cart[itemIndex].price = (qtdValue <= 1) ? price : subTotal;
+      const qtdCheck = (cart[itemIndex].qtd >= available);
+      localStorage.setItem('cart', JSON.stringify(cart));
       this.setState({
-        isButtonDisabled: true,
+        increaseDisabled: (qtdCheck),
       });
     }
   }
 
-  removeItem() {
-    const { subTotal } = this.state;
-    // console.log(subTotal);
-    const { price } = this.props;
-    // console.log(price);
-    const updateSubTotal = subTotal - price;
-    // console.log(updateSubTotal);
-    this.setState({
-      subTotal: updateSubTotal,
-    });
+  updateState = (qtd, price) => {
+    this.setState(({
+      qtdValue: qtd,
+      subTotal: price,
+      decreaseDisabled: (qtd <= MIN_VALUE),
+    }));
+  }
+
+  deleteItem = () => {
+    const { id } = this.props;
+    const cart = localStorage.cart ? JSON.parse(localStorage.cart) : [];
+    if (cart) {
+      const filter = cart.filter((item) => item.id !== id);
+      localStorage.setItem('cart', JSON.stringify(filter));
+    }
+    window.location.reload(false);
   }
 
   cartSubTotal(price, amount) {
@@ -88,7 +104,13 @@ class CartItem extends React.Component {
   // }
 
   render() {
-    const { qtdValue, isButtonDisabled, subTotal } = this.state;
+    const {
+      qtdValue,
+      subTotal,
+      increaseDisabled,
+      decreaseDisabled,
+    } = this.state;
+
     const {
       title,
       thumbnail,
@@ -105,37 +127,59 @@ class CartItem extends React.Component {
           />
         </div>
         <div className="cart__title">
-          <p
-            data-testid="shopping-cart-product-name"
+          <Link
+            to={ { pathname: `/ProductDetails/${id}` } }
+            data-testid="product-detail-link"
+            className="product-title"
+            key={ id }
           >
-            {title}
-          </p>
+            <p
+              data-testid="shopping-cart-product-name"
+            >
+              {title}
+            </p>
+          </Link>
         </div>
         <div className="cart__qty">
           <button
             type="button"
             data-testid="product-increase-quantity"
             onClick={ this.handleClickIncrease }
+            disabled={ increaseDisabled }
           >
-            {' '}
-            +
-            {' '}
+            {' + '}
           </button>
-          <span data-testid="shopping-cart-product-quantity">{qtdValue}</span>
+          <span
+            className="cart__qty-text"
+            data-testid="shopping-cart-product-quantity"
+          >
+            {qtdValue}
+          </span>
           <button
             type="button"
             data-testid="product-decrease-quantity"
             onClick={ this.handleClickDecrease }
-            disabled={ isButtonDisabled }
+            disabled={ decreaseDisabled }
           >
-            -
-            {' '}
+            {' - '}
           </button>
         </div>
         <div className="cart__sub">
           <p>
             {subTotal}
           </p>
+        </div>
+        <div className="cart__remove">
+          <button
+            type="button"
+            className="cart__remove-btn"
+            onClick={ this.deleteItem }
+          >
+            <img
+              src={ deleteIcon }
+              alt="Delete"
+            />
+          </button>
         </div>
       </div>
     );
@@ -145,10 +189,10 @@ class CartItem extends React.Component {
 CartItem.propTypes = {
   title: PropTypes.string,
   price: PropTypes.number,
+  id: PropTypes.string,
+  qtd: PropTypes.number,
   thumbnail: PropTypes.string,
-  classDiv: PropTypes.string,
-  classTitle: PropTypes.string,
-  classImg: PropTypes.string,
+  available: PropTypes.number,
 }.isRequired;
 
 export default CartItem;

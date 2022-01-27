@@ -17,6 +17,10 @@
   width: 80%;
 }
 
+.details__shipping {
+  width: 70%;
+}
+
 .details__left {
   margin-right: 50px;
   width: 90%;

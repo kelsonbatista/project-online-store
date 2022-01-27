@@ -1,0 +1,175 @@
+.checkout {
+  margin: 30px auto;
+  margin-bottom: 300px;
+  width: 90%;
+}
+
+.checkout__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.checkout__item {
+  border-bottom: 1px solid #aaa;
+  display: flex;
+}
+
+.checkout__table {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+.checkout__table-title {
+  border: 1px solid #333;
+  border-radius: 10px 0 0 10px;
+  padding: 15px 0;
+  width: 75%;
+}
+
+.checkout__table-qty {
+  border: 1px solid #333;
+  padding: 15px 0;
+  width: 10%;
+}
+
+.checkout__table-sub {
+  border: 1px solid #333;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 0;
+  width: 15%;
+}
+
+.checkout__item-title {
+  width: 75%;
+}
+
+.checkout__item-qty {
+  text-align: center;
+  width: 10%;
+}
+
+.checkout__item-sub {
+  text-align: center;
+  width: 15%;
+}
+
+.checkout__img-div {
+  width: 10%;
+}
+
+.checkout__img-prod {
+  height: 90px;
+}
+
+.checkout__title {
+  align-self: center;
+  width: 65%;
+}
+
+.checkout__qty {
+  align-self: center;
+  text-align: center;
+  width: 10%;
+}
+
+.checkout__qty button {
+  margin: 0 15px;
+}
+
+.checkout__sub {
+  align-self: center;
+  text-align: center;
+  width: 15%;
+}
+
+.checkout__btn-chk {
+  background-color: #4c6faf;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 55px;
+  padding: 11px 32px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.checkout__btn-chk:hover {
+  background-color: #284f97;
+}
+
+.checkout__total {
+  font-size: 22px;
+  font-weight: 700;
+  padding-right: 60px;
+  text-align: right;
+}
+
+.checkout__info {
+  border: 1px solid #555;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 20px;
+  padding-top: 35px;
+}
+
+.checkout__form-item {
+  height: 30px;
+  margin-bottom: 15px;
+  width: 22%;
+}
+
+.checkout__address {
+  width: 73%;
+}
+
+.checkout__heading {
+  font-size: 20px;
+  font-weight: 700;
+  padding-top: 30px;
+}
+
+.checkout__pay {
+  border: 1px solid #555;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 30px;
+}
+
+.checkout__pay label {
+  margin-right: 50px;
+}
+
+.checkout__btn-div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.checkout__btn {
+  background-color: #4c6faf;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 55px;
+  padding: 11px 32px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.checkout__btn:hover {
+  background-color: #284f97;
+}
+
+.fa-barcode, .fa-credit-card {
+  font-size: 40px;
+}

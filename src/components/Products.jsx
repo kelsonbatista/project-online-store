@@ -5,8 +5,17 @@ import ProductsItem from './ProductsItem';
 import '../styles/Products.css';
 
 class Products extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      qtyStateSum: 1,
+    };
+  }
+
   render() {
     const { answerSearch } = this.props;
+    const { qtyStateSum } = this.state;
     // console.log('pagina certa', this.props);
 
     return (
@@ -19,6 +28,9 @@ class Products extends React.Component {
               thumbnail={ product.thumbnail }
               price={ product.price }
               id={ product.id }
+              available={ product.available_quantity }
+              freeShipping={ product.shipping.free_shipping }
+              qtyStateSum={ qtyStateSum }
             />
           ))}
         </div>

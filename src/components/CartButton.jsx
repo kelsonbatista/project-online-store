@@ -5,7 +5,8 @@ import '../styles/CartButton.css';
 
 class CartButton extends Component {
   render() {
-    const cartItemsQty = localStorage.cart ? JSON.parse(localStorage.cart).length : 0;
+    const cartItems = localStorage.cart ? JSON.parse(localStorage.cart) : [];
+    const cartItemsQty = cartItems.reduce((acc, item) => acc + item.qtd, 0);
 
     return (
       <div className="cart__btn-div">
@@ -22,7 +23,9 @@ class CartButton extends Component {
             className="cart__img"
           />
         </Link>
-        <div className="cart__btn-qty"><p>{cartItemsQty}</p></div>
+        <div className="cart__btn-qty">
+          <p data-testid="shopping-cart-size">{cartItemsQty}</p>
+        </div>
       </div>
     );
   }

@@ -28,7 +28,7 @@ class Reviews extends Component {
     });
 
     localStorage.setItem('reviews', JSON.stringify(review));
-    window.location.reload();
+    window.location.reload(false);
   }
 
   handleInputChange = ({ target }) => {

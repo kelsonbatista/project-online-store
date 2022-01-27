@@ -2,7 +2,6 @@
   display: flex;
   justify-content: flex-end;
   position: relative;
-  width: 7%;
 }
 
 .cart__btn-qty {
