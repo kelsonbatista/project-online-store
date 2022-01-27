@@ -17,6 +17,7 @@ class Products extends React.Component {
     const { answerSearch } = this.props;
     const { qtyStateSum } = this.state;
     // console.log('pagina certa', this.props);
+    // comentário para abrir nova PR
 
     return (
       <section className="products__section">
