@@ -12,13 +12,9 @@ The activity was developed in a group using the agile methodology SCRUM and acco
 *Esse projeto é uma versão simplificada de uma **loja online**, onde os usuários podem:*
 
   *- Buscar produtos por termos e categorias a partir da _API do Mercado Livre_;*
-
   *- Adicionar e remover itens de um carrinho de compras em diferentes quantidades;*
-
   *- Visualizar detalhes e avaliações prévias de um produto, bem como criar novas avaliações;*
-
   *- Finalizar a compra (simulada) dos itens selecionados.*
-  
 *A atividade foi desenvolvida em grupo através da metodologia ágil SCRUM e de acordo com demandas definidas em um quadro _Kanban_, em um cenário mais próximo ao do mercado de trabalho.*
 
 ---
