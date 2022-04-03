@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Reviews extends Component {
   constructor() {
@@ -19,9 +20,12 @@ class Reviews extends Component {
       comments,
     } = this.state;
 
+    const { productId } = this.props;
+
     const review = localStorage.reviews ? JSON.parse(localStorage.reviews) : [];
 
     review.push({
+      productId,
       score,
       email,
       comments,
@@ -51,21 +55,22 @@ class Reviews extends Component {
 
     const items = JSON.parse(localStorage.getItem('reviews'));
     const reviewItems = (items && items.length) ? items : [];
-
     const NUM_STARS = 5;
+    const { productId } = this.props;
 
     const listItems = (
-      reviewItems.map((review, index) => (
-        <div className="reviews__item" key={ index }>
-          <div className="reviews__item-top">
-            <p className="reviews__item-email">{ review.email }</p>
-            <p className="reviews__item-score">{ review.score }</p>
+      reviewItems.filter((itemReview) => itemReview.productId === productId)
+        .map((review, index) => (
+          <div className="reviews__item" key={ index }>
+            <div className="reviews__item-top">
+              <p className="reviews__item-email">{ review.email }</p>
+              <p className="reviews__item-score">{ review.score }</p>
+            </div>
+            <div className="reviews__item-bot">
+              <p className="reviews__item-comments">{ review.comments }</p>
+            </div>
           </div>
-          <div className="reviews__item-bot">
-            <p className="reviews__item-comments">{ review.comments }</p>
-          </div>
-        </div>
-      ))
+        ))
     );
 
     return (
@@ -145,5 +150,9 @@ class Reviews extends Component {
     );
   }
 }
+
+Reviews.propTypes = {
+  productId: PropTypes.string,
+}.isRequired;
 
 export default Reviews;

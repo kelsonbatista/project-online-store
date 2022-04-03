@@ -42,7 +42,9 @@ class ProductsItem extends React.Component {
       thumbnail,
       price,
       id,
+      available,
       freeShipping,
+      cartItemsQty,
     } = this.props;
 
     const freteGratisNao = <p className="products__shipping-not">Hidden</p>;
@@ -79,8 +81,13 @@ class ProductsItem extends React.Component {
         <button
           className="products__btn-add"
           type="button"
+          data-id={ id }
+          data-title={ title }
+          data-thumbnail={ thumbnail }
+          data-price={ price }
+          data-available={ available }
           data-testid="product-add-to-cart"
-          onClick={ this.addCart }
+          onClick={ cartItemsQty }
         >
           Adicionar Carrinho
         </button>
@@ -99,5 +106,8 @@ ProductsItem.propTypes = {
   classTitle: PropTypes.string,
   classImg: PropTypes.string,
 }.isRequired;
+
+// const { qtyState } = this.state;
+// export const qtyContext = React.createContext(qtyState);
 
 export default ProductsItem;

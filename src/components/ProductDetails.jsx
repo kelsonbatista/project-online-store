@@ -124,7 +124,7 @@ export default class ProductDetails extends Component {
           </div>
         </div>
         <div className="reviews">
-          <Reviews />
+          <Reviews productId={ product.id } />
         </div>
       </section>
     );

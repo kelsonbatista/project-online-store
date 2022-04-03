@@ -14,7 +14,7 @@ class Products extends React.Component {
   }
 
   render() {
-    const { answerSearch } = this.props;
+    const { answerSearch, cartItemsQty } = this.props;
     const { qtyStateSum } = this.state;
     // console.log('pagina certa', this.props);
     // comentário para abrir nova PR
@@ -32,6 +32,7 @@ class Products extends React.Component {
               available={ product.available_quantity }
               freeShipping={ product.shipping.free_shipping }
               qtyStateSum={ qtyStateSum }
+              cartItemsQty={ cartItemsQty }
             />
           ))}
         </div>
@@ -42,6 +43,7 @@ class Products extends React.Component {
 
 Products.propTypes = {
   answerSearch: PropTypes.string,
+  cartItemsQty: PropTypes.number,
 }.isRequired;
 
 export default Products;

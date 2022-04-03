@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import Products from '../components/Products';
 import CategoryItem from '../components/CategoryItem';
@@ -16,6 +17,7 @@ class Home extends React.Component {
       // categorieSelect: '',
       isLoading: false,
       categories: [],
+      qtyState: 0,
     };
   }
 
@@ -66,13 +68,37 @@ class Home extends React.Component {
     });
   }
 
+  addToCart = async ({ target }) => {
+    this.setState((prevState) => ({ qtyState: prevState.qtyState + 1 }));
+
+    const cart = localStorage.cart ? JSON.parse(localStorage.cart) : [];
+    // const check = await cart.filter((item) => item.id === target.getAttribute('data-id'));
+    // if (check.length !== 0) {
+    //   console.log(check.qtd, 'check');
+    //   check.qtd += Number(1);
+    // } else {
+    cart.push({
+      title: target.getAttribute('data-title'),
+      thumbnail: target.getAttribute('data-thumbnail'),
+      price: target.getAttribute('data-price'),
+      id: target.getAttribute('data-id'),
+      available: target.getAttribute('data-available'),
+      qtd: 1,
+    });
+    // }
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
   render() {
     const {
       productSearch,
       answerSearch,
       isLoading,
       categories,
+      qtyState,
     } = this.state;
+
+    // const { cartItemsQty } = this.props;
 
     const categoriesList = categories.map((category) => (
       <CategoryItem
@@ -115,7 +141,7 @@ class Home extends React.Component {
             >
               Pesquisar
             </button>
-            <CartButton />
+            <CartButton cartItemsQty={ qtyState } />
           </div>
           <div className="search__text">
             <h4 data-testid="home-initial-message">
@@ -123,12 +149,16 @@ class Home extends React.Component {
             </h4>
           </div>
           <div>
-            <Products answerSearch={ answerSearch } />
+            <Products answerSearch={ answerSearch } cartItemsQty={ this.addToCart } />
           </div>
         </section>
       </main>
     );
   }
 }
+
+Home.propTypes = {
+  cartItemsQty: PropTypes.number,
+}.isRequired;
 
 export default Home;

@@ -169,10 +169,10 @@ class CartItem extends React.Component {
             {subTotal}
           </p>
         </div>
-        <div className="cart__remove">
+        <div className="cart__del">
           <button
             type="button"
-            className="cart__remove-btn"
+            className="cart__del-btn"
             onClick={ this.deleteItem }
           >
             <img

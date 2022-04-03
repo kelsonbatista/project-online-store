@@ -5,6 +5,7 @@ import BackButton from '../components/BackButton';
 import CartItem from '../components/CartItem';
 import '../styles/Cart.css';
 import CartEmpty from '../components/CartEmpty';
+import delete1 from '../images/delete1.jpeg';
 
 class Cart extends React.Component {
   constructor() {
@@ -34,6 +35,7 @@ class Cart extends React.Component {
 
   render() {
     const { cart } = this.state;
+    const { cartItemsQty } = this.props;
     if (cart === null) {
       return (
         <CartEmpty />
@@ -50,6 +52,9 @@ class Cart extends React.Component {
           <div className="cart__table-title">Nome</div>
           <div className="cart__table-qty">Qtd</div>
           <div className="cart__table-sub">Subtotal</div>
+          <div className="cart__table-del">
+            <img src={ delete1 } alt="Remover" />
+          </div>
         </div>
         <div className="cart__items">
           {cart.map((product, index) => (
@@ -61,6 +66,7 @@ class Cart extends React.Component {
               thumbnail={ product.thumbnail }
               price={ product.price }
               available={ product.available }
+              onClick={ cartItemsQty }
             />
           ))}
         </div>
@@ -81,6 +87,7 @@ class Cart extends React.Component {
 
 Cart.propTypes = {
   history: PropTypes.array,
+  cartItemsQty: PropTypes.number,
 }.isRequired;
 
 export default Cart;

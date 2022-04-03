@@ -28,7 +28,7 @@
   border: 1px solid #333;
   border-radius: 10px 0 0 10px;
   padding: 15px 0;
-  width: 75%;
+  width: 70%;
 }
 
 .cart__table-qty {
@@ -39,9 +39,19 @@
 
 .cart__table-sub {
   border: 1px solid #333;
-  border-radius: 0 10px 10px 0;
   padding: 15px 0;
   width: 15%;
+}
+
+.cart__table-del {
+  border: 1px solid #333;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 0;
+  width: 5%;
+}
+
+.cart__table-del img {
+  width: 18px;
 }
 
 .cart__img-div {
@@ -54,7 +64,7 @@
 
 .cart__title {
   align-self: center;
-  width: 65%;
+  width: 60%;
 }
 
 .cart__qty {
@@ -71,6 +81,22 @@
   align-self: center;
   text-align: center;
   width: 15%;
+}
+
+.cart__del {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 5%;
+}
+
+.cart__del-btn {
+  border: none;
+}
+
+.cart__del-btn img {
+  cursor: pointer;
+  width: 30px;
 }
 
 .cart__btn-chk-div {
@@ -94,21 +120,4 @@
 
 .cart__btn-chk:hover {
   background-color: #284f97;
-}
-
-.cart__remove {
-  align-items: center;
-  display: flex;
-  z-index: 100;
-}
-
-.cart__remove-btn {
-  border: none;
-  z-index: 100;
-}
-
-.cart__remove-btn img {
-  cursor: pointer;
-  width: 30px;
-  z-index: 110;
 }
