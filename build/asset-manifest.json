@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/project-online-store/static/css/main.3a57319f.chunk.css",
+    "main.js": "/project-online-store/static/js/main.eeb2e8e6.chunk.js",
+    "main.js.map": "/project-online-store/static/js/main.eeb2e8e6.chunk.js.map",
+    "runtime-main.js": "/project-online-store/static/js/runtime-main.1dc74610.js",
+    "runtime-main.js.map": "/project-online-store/static/js/runtime-main.1dc74610.js.map",
+    "static/js/2.0e488880.chunk.js": "/project-online-store/static/js/2.0e488880.chunk.js",
+    "static/js/2.0e488880.chunk.js.map": "/project-online-store/static/js/2.0e488880.chunk.js.map",
+    "index.html": "/project-online-store/index.html",
+    "precache-manifest.e7068c820a987e0581a1f330662adda9.js": "/project-online-store/precache-manifest.e7068c820a987e0581a1f330662adda9.js",
+    "service-worker.js": "/project-online-store/service-worker.js",
+    "static/css/main.3a57319f.chunk.css.map": "/project-online-store/static/css/main.3a57319f.chunk.css.map",
+    "static/js/2.0e488880.chunk.js.LICENSE.txt": "/project-online-store/static/js/2.0e488880.chunk.js.LICENSE.txt",
+    "static/media/cartIcon.jpg": "/project-online-store/static/media/cartIcon.7f3645f1.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1dc74610.js",
+    "static/js/2.0e488880.chunk.js",
+    "static/css/main.3a57319f.chunk.css",
+    "static/js/main.eeb2e8e6.chunk.js"
+  ]
+}
